@@ -173,5 +173,5 @@ dist
 
 
 
-src/tokens.ts
+src/token.ts
 wrangler.toml

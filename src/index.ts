@@ -2,10 +2,11 @@ import { Hono } from "hono";
 import { cors } from 'hono/cors';
 import { secureHeaders } from 'hono/secure-headers';
 import { bearerAuth } from 'hono/bearer-auth';
-import { token, APP_ID } from "./tokens";
+import { token } from "./token";
 
 type Bindings = {
 	CURRENCIES: KVNamespace;
+	APP_ID: string;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
@@ -39,7 +40,7 @@ app.get('/currencies', async (c) => {
 
 app.get('/update', async (c) => {
 
-	const currencies: currencyRateList = await fetch('https://openexchangerates.org/api/latest.json?app_id=' + APP_ID).then(res => res.json());
+	const currencies: currencyRateList = await fetch('https://openexchangerates.org/api/latest.json?app_id=' + c.env.APP_ID).then(res => res.json());
 	const timestamp = currencies.timestamp;
 	const rates = currencies.rates;
 	for (const [currency, rate] of Object.entries(rates)) {

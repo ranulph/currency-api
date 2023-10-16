@@ -23,7 +23,7 @@ app.get('/currency/:code', async (c) => {
 		const currency = JSON.parse(kv);
 		return c.json(currency)
 	}
-	const error = { error: 'Currency not found' };
+	const error = { error: 'Currency not found', ok: false };
 	return c.newResponse(JSON.stringify(error), 404)
 });
 
@@ -34,13 +34,25 @@ app.get('/currencies', async (c) => {
 		const currencies = JSON.parse(kv);
 		return c.json(currencies)
 	}
-	const error = { error: 'Incorrect request' };
+	const error = { error: 'Incorrect request', ok: false };
+	return c.newResponse(JSON.stringify(error), 404)
+});
+
+app.get('/rates', async (c) => {
+
+	const kv = await c.env.CURRENCIES.get('rates');
+	if (kv) {
+		const rates = JSON.parse(kv);
+		return c.json(rates)
+	}
+	const error = { error: 'Incorrect request', ok: false };
 	return c.newResponse(JSON.stringify(error), 404)
 });
 
 app.get('/update', async (c) => {
 
 	const currencies: currencyRateList = await fetch('https://openexchangerates.org/api/latest.json?app_id=' + c.env.APP_ID).then(res => res.json());
+	await c.env.CURRENCIES.put('rates', JSON.stringify(currencies));
 	const timestamp = currencies.timestamp;
 	const rates = currencies.rates;
 	for (const [currency, rate] of Object.entries(rates)) {
@@ -55,7 +67,7 @@ app.get('/update', async (c) => {
 			c.env.CURRENCIES.put(currency, JSON.stringify(updated))
 		}
 	}
-	return c.json({ success: "ok" })
+	return c.json({ ok: true })
 
 });
 
@@ -73,3 +85,4 @@ type currencyRateList = {
 	base: string;
 	rates: object;
 };
+

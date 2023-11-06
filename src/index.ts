@@ -19,7 +19,7 @@ app.doc('/doc', {
 	info: {
 	  title: 'Currencies API',
 	  version: 'v1',
-	  description: 'Request rates and details for 180 currencies. USD base rate. Updated hourly. Requires Bearer Authentication.'
+	  description: 'Request rates and details for 170 currencies. USD base rate. Updated hourly. Requires Bearer Authentication.'
 	},
 	openapi: '3.1.0'
 });

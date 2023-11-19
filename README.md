@@ -11,7 +11,7 @@ Email ranulph@mailfence.com if you would like a Bearer Auth token.
   
   
   
-An example API response (2KB) to GET 'https://api.currencies.worlddata.run/currency/GBP':  
+An example API response (2KB) to GET https://api.currencies.worlddata.run/currency/GBP
   
 {  
   "code": "GBP",  

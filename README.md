@@ -4,15 +4,15 @@
 See https://api.currencies.worlddata.run/ui for OpenAPI/Swagger documentation web interface.  
 Currency rates auto update every hour. ~170 currencies.  
 Uses Cloudflare Workers, Cloudflare KVStore, openexchangerates.org for rates, Hono, Hono OpenAPI plugin.  
-## \newline
+  
 Provides a SVG flag, encoded in a Base64 string. Can be placed directly into a HTML img tag src=.  
-## \newline
+  
 Email ranulph@mailfence.com if you would like a Bearer Auth token.  
-## \newline
-## \newline
-## \newline 
+  
+  
+  
 An example API response (2KB) to GET 'https://api.currencies.worlddata.run/currency/GBP':  
-## \newline
+  
 {  
   "code": "GBP",  
   "name": "Pound Sterling",  
